@@ -20,6 +20,50 @@
         <servlet-name>DBConnection</servlet-name>
         <servlet-class>com.mvc.util.DBConnection</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>VoteDAO</servlet-name>
+        <servlet-class>com.mvc.dao.VoteDAO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VoteServlet</servlet-name>
+        <servlet-class>com.mvc.controller.VoteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Election</servlet-name>
+        <servlet-class>com.mvc.model.Election</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ElectionDAO</servlet-name>
+        <servlet-class>com.mvc.dao.ElectionDAO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateElectionServlet</servlet-name>
+        <servlet-class>com.mvc.controller.CreateElectionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Candidate</servlet-name>
+        <servlet-class>com.mvc.model.Candidate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CandidateDAO</servlet-name>
+        <servlet-class>com.mvc.dao.CandidateDAO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddCandidateServlet</servlet-name>
+        <servlet-class>com.mvc.controller.AddCandidateServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResultDAO</servlet-name>
+        <servlet-class>com.mvc.dao.ResultDAO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResultServlet</servlet-name>
+        <servlet-class>com.mvc.controller.ResultServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.mvc.controller.LogoutServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -39,5 +83,49 @@
     <servlet-mapping>
         <servlet-name>DBConnection</servlet-name>
         <url-pattern>/DBConnection</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VoteDAO</servlet-name>
+        <url-pattern>/VoteDAO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VoteServlet</servlet-name>
+        <url-pattern>/VoteServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Election</servlet-name>
+        <url-pattern>/Election</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ElectionDAO</servlet-name>
+        <url-pattern>/ElectionDAO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateElectionServlet</servlet-name>
+        <url-pattern>/CreateElectionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Candidate</servlet-name>
+        <url-pattern>/Candidate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CandidateDAO</servlet-name>
+        <url-pattern>/CandidateDAO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddCandidateServlet</servlet-name>
+        <url-pattern>/AddCandidateServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResultDAO</servlet-name>
+        <url-pattern>/ResultDAO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResultServlet</servlet-name>
+        <url-pattern>/ResultServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/LogoutServlet</url-pattern>
     </servlet-mapping>
 </web-app>
