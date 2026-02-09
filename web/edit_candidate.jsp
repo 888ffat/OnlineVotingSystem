@@ -1,11 +1,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.sql.*, com.mvc.util.DBConnection, com.mvc.model.User" %>
 <%
+    // Security Check
     User user = (User) session.getAttribute("user");
     if(user == null || !user.getRole().equals("admin")){
         response.sendRedirect("login.jsp");
         return;
     }
+
+    int id = Integer.parseInt(request.getParameter("id"));
+    Connection con = DBConnection.getConnection();
+    PreparedStatement ps = con.prepareStatement(
+        "SELECT * FROM candidates WHERE candidate_id=?"
+    );
+    ps.setInt(1, id);
+    ResultSet rs = ps.executeQuery();
+    rs.next();
 %>
 
 <!DOCTYPE html>
@@ -13,7 +23,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Add Candidate | Voting Admin</title>
+<title>Edit Candidate | Voting Admin</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -26,7 +36,6 @@
     --white: #ffffff;
     --text-dark: #2d3436;
     --text-muted: #636e72;
-    --success: #27ae60;
 }
 
 body {
@@ -37,7 +46,7 @@ body {
     min-height: 100vh;
 }
 
-/* Sidebar */
+/* ===== SIDEBAR ===== */
 .sidebar {
     width: 260px;
     background: var(--primary-dark);
@@ -45,9 +54,6 @@ body {
     padding: 30px 0;
     display: flex;
     flex-direction: column;
-    box-shadow: 4px 0 10px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
     height: 100vh;
 }
 
@@ -75,7 +81,7 @@ body {
     border-left: 4px solid var(--secondary);
 }
 
-/* Main Content – CENTERED like Create Election */
+/* ===== MAIN CONTENT ===== */
 .main-content {
     flex: 1;
     display: flex;
@@ -84,7 +90,6 @@ body {
     padding: 40px;
 }
 
-/* Card */
 .form-card {
     background: var(--white);
     padding: 40px;
@@ -112,7 +117,6 @@ h2 {
     font-size: 14px;
 }
 
-/* Form */
 .form-group {
     margin-bottom: 20px;
 }
@@ -125,7 +129,8 @@ label {
     font-size: 14px;
 }
 
-input[type="text"], select, textarea {
+input[type="text"],
+textarea {
     width: 100%;
     padding: 12px;
     border: 2px solid #edf2f7;
@@ -135,7 +140,8 @@ input[type="text"], select, textarea {
     transition: 0.3s;
 }
 
-input:focus, select:focus, textarea:focus {
+input:focus,
+textarea:focus {
     outline: none;
     border-color: var(--primary);
     background: white;
@@ -143,11 +149,10 @@ input:focus, select:focus, textarea:focus {
 }
 
 textarea {
-    height: 100px;
+    height: 120px;
     resize: none;
 }
 
-/* Button */
 .submit-btn {
     width: 100%;
     background: var(--primary);
@@ -159,40 +164,11 @@ textarea {
     font-weight: 700;
     cursor: pointer;
     transition: 0.3s;
-    margin-top: 10px;
 }
 
 .submit-btn:hover {
     background: var(--primary-dark);
     transform: translateY(-2px);
-}
-
-/* Success Message */
-.success-msg {
-    background: #e6fffa;
-    color: var(--success);
-    padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    border-left: 5px solid var(--success);
-    font-size: 14px;
-    font-weight: bold;
-}
-
-/* Footer Link */
-.footer-link {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.footer-link a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.footer-link a:hover {
-    color: var(--primary);
 }
 </style>
 </head>
@@ -204,56 +180,32 @@ textarea {
     <a href="admin_dashboard.jsp">Dashboard Overview</a>
     <a href="admin_manage_elections.jsp">Manage Elections</a>
     <a href="admin_create_election.jsp">Create Election</a>
-    <a href="admin_add_candidate.jsp" class="active">Add Candidate</a>
-    <a href="admin_manage_candidates.jsp">Candidate List</a>
+    <a href="admin_add_candidate.jsp">Add Candidate</a>
+    <a href="admin_manage_candidates.jsp" class="active">Candidate List</a>
     <a href="LogoutServlet" style="margin-top:auto;color:#fab1a0;">Logout</a>
 </div>
 
 <div class="main-content">
     <div class="form-card">
+        <h2>Edit Candidate</h2>
+        <p class="subtitle">Update candidate details and manifesto.</p>
 
-        <h2>Add New Candidate</h2>
-        <p class="subtitle">Assign a student to an active election and add their manifesto.</p>
-
-        <% if(request.getParameter("msg") != null){ %>
-            <div class="success-msg">✅ Candidate added successfully!</div>
-        <% } %>
-
-        <form method="post" action="AddCandidateServlet">
+        <form method="post" action="UpdateCandidateServlet">
+            <input type="hidden" name="id" value="<%= id %>">
 
             <div class="form-group">
-                <label>Select Active Election</label>
-                <select name="election" required>
-                    <option disabled selected>-- Choose Election --</option>
-                    <%
-                        try {
-                            Connection con = DBConnection.getConnection();
-                            Statement st = con.createStatement();
-                            ResultSet rs = st.executeQuery(
-                                "SELECT * FROM elections WHERE status='active' OR status='Open'"
-                            );
-                            while(rs.next()){
-                    %>
-                        <option value="<%= rs.getInt("election_id") %>">
-                            <%= rs.getString("title") %>
-                        </option>
-                    <% }} catch(Exception e){ e.printStackTrace(); } %>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Candidate Full Name</label>
-                <input type="text" name="name" required>
+                <label>Candidate Name</label>
+                <input type="text" name="name"
+                       value="<%= rs.getString("name") %>" required>
             </div>
 
             <div class="form-group">
                 <label>Manifesto</label>
-                <textarea name="manifesto"></textarea>
+                <textarea name="manifesto"><%= rs.getString("manifesto") %></textarea>
             </div>
 
-            <button class="submit-btn">Register Candidate</button>
+            <button type="submit" class="submit-btn">Update Candidate</button>
         </form>
-
     </div>
 </div>
 

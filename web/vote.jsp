@@ -5,166 +5,223 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Vote</title>
+<meta charset="UTF-8">
+<title>Cast Your Vote</title>
 
 <style>
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: "Segoe UI", Arial, sans-serif;
-        background: #eef2f7;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        min-height: 100vh;
-    }
+body{
+    margin:0;
+    font-family:"Segoe UI", Arial, sans-serif;
+    background:#eef2f7;
+}
 
-    .header-banner {
-        width: 100%;
-        background: linear-gradient(to right, #305fbf, #4a80ff);
-        color: white;
-        padding: 20px 0;
-        text-align: center;
-        font-size: 26px;
-        font-weight: bold;
-        letter-spacing: 1px;
-        box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-    }
+/* ===== NAVBAR ===== */
+.navbar{
+    background:#1f3c88;
+    color:white;
+    padding:8px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
 
-    .container {
-        background: white;
-        padding: 30px 25px;
-        border-radius: 12px;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-        max-width: 500px;
-        width: 90%;
-        text-align: center;
-        margin-top: 40px; 
-    }
+.navbar a{
+    background:#4a80ff;
+    padding:6px 14px;
+    border-radius:6px;
+    color:white;
+    text-decoration:none;
+    font-size:13px;
+}
 
-    h2 {
-        color: #305fbf;
-        margin-bottom: 25px;
-        font-size: 22px;
-    }
+/* ===== PAGE ===== */
+.container{
+    max-width:900px;
+    margin:40px auto;
+}
 
-    .candidate-option {
-        display: block;
-        margin: 12px 0;
-        font-size: 16px;
-        cursor: pointer;
-        padding: 10px 12px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        transition: 0.3s;
-        text-align: left;
-    }
+.title{
+    text-align:center;
+    font-size:26px;
+    font-weight:bold;
+    color:#1f3c88;
+}
 
-    .candidate-option:hover {
-        background: #f0f4ff;
-        border-color: #305fbf;
-    }
+.subtitle{
+    text-align:center;
+    color:#555;
+    margin:8px 0 30px;
+}
 
-    input[type="radio"] {
-        margin-right: 10px;
-        cursor: pointer;
-    }
+/* ===== VOTE CARD ===== */
+.vote-card{
+    background:white;
+    padding:35px 40px;
+    border-radius:16px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.12);
+    max-width:520px;
+    margin:auto;
+}
 
-    button {
-        margin-top: 20px;
-        padding: 12px 22px;
-        background: linear-gradient(90deg, #305fbf, #4a80ff);
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: 0.3s;
-        width: 100%;
-    }
+/* instruction */
+.vote-hint{
+    text-align:center;
+    color:#666;
+    margin-bottom:25px;
+}
 
-    button:hover {
-        background: linear-gradient(90deg, #234a99, #3766ff);
-        transform: scale(1.03);
-    }
+/* ===== CANDIDATE OPTIONS ===== */
+.option{
+    border:2px solid #e1e5ee;
+    border-radius:12px;
+    padding:16px 18px;
+    margin-bottom:14px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    transition:0.25s;
+}
 
-    .back-btn {
-        display: inline-block;
-        margin-top: 25px;
-        padding: 12px 22px;
-        background: #d9534f;
-        color: white;
-        border-radius: 6px;
-        text-decoration: none;
-        font-size: 16px;
-        transition: 0.3s;
-    }
+.option:hover{
+    border-color:#4a80ff;
+    background:#f6f9ff;
+}
 
-    .back-btn:hover {
-        background: #b7322e;
-    }
+.option input{
+    transform:scale(1.3);
+}
+
+.option.selected{
+    border-color:#305fbf;
+    background:#eef3ff;
+}
+
+.option .name{
+    font-size:17px;
+    font-weight:600;
+    color:#1f3c88;
+}
+
+/* ===== ACTIONS ===== */
+.actions{
+    margin-top:15px;
+}
+
+.submit-btn, .cancel-btn{
+    padding:7px 12px;
+    border-radius:5px;
+    text-decoration:none;
+    font-size:13px;
+    margin-right:6px;
+    display:inline-block;
+}
+
+.submit-btn{ background:#4a80ff; color:white; }
+.cancel-btn{ background:#777; color:white; }
+
+/* ===== FOOTER NOTE ===== */
+.vote-note{
+    margin-top:20px;
+    text-align:center;
+    font-size:13px;
+    color:#777;
+}
 </style>
-</head>
 
+<script>
+function selectCard(card){
+    document.querySelectorAll('.option')
+        .forEach(o=>o.classList.remove('selected'));
+    card.classList.add('selected');
+    card.querySelector('input').checked = true;
+}
+
+function confirmVote(){
+    return confirm(
+        "Your vote is final and cannot be changed.\n\nConfirm submission?"
+    );
+}
+</script>
+
+</head>
 <body>
 
-<div class="header-banner">Online Student Election System</div>
+<div class="navbar">
+    <h2>Student Election Portal</h2>
+    <a href="voter_dashboard.jsp">Dashboard</a>
+</div>
 
 <div class="container">
 
-    <h2>Select Your Candidate</h2>
+<%
+Connection con = DBConnection.getConnection();
 
-    <form method="post" action="VoteServlet">
-        <input type="hidden" name="eid" value="<%= eid %>">
+/* Election details */
+PreparedStatement pe = con.prepareStatement(
+    "SELECT title, description FROM elections WHERE election_id=?"
+);
+pe.setInt(1, eid);
+ResultSet er = pe.executeQuery();
+er.next();
+%>
 
-        <%
-            Connection con = null;
-            PreparedStatement ps = null;
-            ResultSet rs = null;
+<div class="title"><%=er.getString("title")%></div>
+<div class="subtitle"><%=er.getString("description")%></div>
 
-            try {
-                con = DBConnection.getConnection();
-                ps = con.prepareStatement(
-                    "SELECT candidate_id, name FROM candidates WHERE election_id=?"
-                );
-                ps.setInt(1, eid);
-                rs = ps.executeQuery();
+<div class="vote-card">
 
-                boolean hasCandidate = false;
+<p class="vote-hint">
+    Please select <b>ONE</b> candidate and submit your vote.
+</p>
 
-                while (rs.next()) {
-                    hasCandidate = true;
-        %>
-            <label class="candidate-option">
-                <input type="radio" name="cid" value="<%= rs.getInt("candidate_id") %>" required>
-                <%= rs.getString("name") %>
-            </label>
-        <%
-                }
+<form method="post" action="VoteServlet" onsubmit="return confirmVote();">
+<input type="hidden" name="eid" value="<%=eid%>">
 
-                if (!hasCandidate) {
-        %>
-            <p style="color:red;">No candidates available for this election.</p>
-        <%
-                }
-            } catch (Exception e) {
-        %>
-            <p style="color:red;"><%= e.getMessage() %></p>
-        <%
-            } finally {
-                if (rs != null) rs.close();
-                if (ps != null) ps.close();
-                if (con != null) con.close();
-            }
-        %>
+<%
+PreparedStatement ps = con.prepareStatement(
+    "SELECT candidate_id, name FROM candidates WHERE election_id=?"
+);
+ps.setInt(1, eid);
+ResultSet rs = ps.executeQuery();
 
-        <button type="submit">Submit Vote</button>
-    </form>
+boolean hasCandidate=false;
+while(rs.next()){
+    hasCandidate=true;
+%>
+<div class="option" onclick="selectCard(this)">
+    <input type="radio" name="cid"
+           value="<%=rs.getInt("candidate_id")%>" required>
+    <div class="name"><%=rs.getString("name")%></div>
+</div>
+<%
+}
+if(!hasCandidate){
+%>
+<p style="color:red; text-align:center;">No candidates available.</p>
+<%
+}
+%>
 
-    <a href="active_elections.jsp" class="back-btn">Back to Elections</a>
+<div class="actions">
+    <button class="submit-btn" type="submit">Submit Vote</button>
+    <a href="active_elections.jsp" class="cancel-btn">Cancel</a>
+</div>
+
+<div class="vote-note">
+    Your vote is anonymous, secure, and final.
+</div>
+
+</form>
 
 </div>
+</div>
+
+<%
+rs.close(); ps.close();
+er.close(); pe.close();
+con.close();
+%>
 
 </body>
 </html>

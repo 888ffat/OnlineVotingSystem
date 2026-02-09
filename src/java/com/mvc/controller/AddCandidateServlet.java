@@ -15,7 +15,6 @@ public class AddCandidateServlet extends HttpServlet {
         c.setElectionId(Integer.parseInt(req.getParameter("election")));
         c.setName(req.getParameter("name"));
         c.setManifesto(req.getParameter("manifesto"));
-        c.setPhoto(req.getParameter("photo")); // filename / URL
 
         CandidateDAO dao = new CandidateDAO();
 

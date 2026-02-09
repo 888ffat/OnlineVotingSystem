@@ -10,12 +10,11 @@ public class CandidateDAO {
         boolean status = false;
         try {
             Connection con = DBConnection.getConnection();
-            String sql = "INSERT INTO candidates(election_id, name, manifesto, photo) VALUES(?,?,?,?)";
+            String sql = "INSERT INTO candidates(election_id, name, manifesto) VALUES(?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, c.getElectionId());
             ps.setString(2, c.getName());
             ps.setString(3, c.getManifesto());
-            ps.setString(4, c.getPhoto());
 
             status = ps.executeUpdate() > 0;
         } catch (Exception e) {
@@ -37,4 +36,46 @@ public class CandidateDAO {
         }
         return rs;
     }
+    
+    public int getTotalCandidates() {
+        int count = 0;
+        try {
+            Connection con = DBConnection.getConnection();
+            String sql = "SELECT COUNT(*) FROM candidates";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) count = rs.getInt(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+    
+    public void updateCandidate(int id, String name, String manifesto) {
+        String sql = "UPDATE candidates SET name=?, manifesto=? WHERE candidate_id=?";
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, name);
+            ps.setString(2, manifesto);
+            ps.setInt(3, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteCandidate(int id) {
+        String sql = "DELETE FROM candidates WHERE candidate_id=?";
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

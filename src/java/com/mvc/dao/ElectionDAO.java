@@ -37,4 +37,47 @@ public class ElectionDAO {
         }
         return rs;
     }
+    
+    public int getTotalElections() {
+    int count = 0;
+    try {
+        Connection con = DBConnection.getConnection();
+        String sql = "SELECT COUNT(*) FROM elections";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) count = rs.getInt(1);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return count;
+}
+
+    public int getActiveElections() {
+        int count = 0;
+        try {
+            Connection con = DBConnection.getConnection();
+            String sql = "SELECT COUNT(*) FROM elections WHERE status='active' OR status='Open'";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) count = rs.getInt(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+    
+    public boolean deleteElection(int id) {
+    try {
+        Connection con = DBConnection.getConnection();
+        PreparedStatement ps =
+            con.prepareStatement("DELETE FROM elections WHERE election_id=?");
+        ps.setInt(1, id);
+        return ps.executeUpdate() > 0;
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return false;
+}
+
+
 }
