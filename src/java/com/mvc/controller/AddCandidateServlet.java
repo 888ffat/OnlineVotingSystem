@@ -5,7 +5,7 @@ import com.mvc.model.Candidate;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import java.io.*;
-
+//
 public class AddCandidateServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res)

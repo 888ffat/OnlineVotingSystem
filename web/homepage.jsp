@@ -125,7 +125,6 @@ body{
 .vote-btn{ background:#4a80ff; color:white; }
 .result-btn{ background:#777; color:white; }
 
-/* footer */
 .footer{
     text-align:center;
     padding:20px;

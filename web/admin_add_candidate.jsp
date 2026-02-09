@@ -178,7 +178,6 @@ textarea {
     font-weight: bold;
 }
 
-/* Footer Link */
 .footer-link {
     text-align: center;
     margin-top: 20px;

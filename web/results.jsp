@@ -12,7 +12,7 @@ body{
     background:#eef2f7;
 }
 
-/* ===== NAVBAR ===== */
+/* ===== NAVBAR ==== */
 .navbar{
     background:#1f3c88;
     color:white;

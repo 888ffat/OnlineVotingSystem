@@ -4,7 +4,7 @@ import com.mvc.dao.CandidateDAO;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import java.io.IOException;
-
+//
 public class UpdateCandidateServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res)

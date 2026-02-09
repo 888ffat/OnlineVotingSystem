@@ -5,7 +5,7 @@ import com.mvc.model.User;
 import java.io.*;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
-
+//
 public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse res)
     throws ServletException, IOException {

@@ -12,7 +12,7 @@ public class ResultServlet extends HttpServlet {
     throws ServletException, IOException {
 
         try {
-            // Get election id from request
+            //Get election id from request
             int eid = Integer.parseInt(req.getParameter("eid"));
 
             // Fetch results using DAO

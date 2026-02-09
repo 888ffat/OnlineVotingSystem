@@ -113,7 +113,6 @@ body{
     cursor:not-allowed;
 }
 
-/* footer */
 .footer{
     text-align:center;
     padding:20px;

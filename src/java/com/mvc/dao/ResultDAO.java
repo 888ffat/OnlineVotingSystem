@@ -3,7 +3,7 @@ package com.mvc.dao;
 import java.sql.*;
 import java.util.*;
 import com.mvc.util.DBConnection;
-
+//
 public class ResultDAO {
 
     // Returns a list of candidate results for a given election

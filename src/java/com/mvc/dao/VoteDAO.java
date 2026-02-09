@@ -2,7 +2,7 @@ package com.mvc.dao;
 
 import java.sql.*;
 import com.mvc.util.DBConnection;
-
+//
 public class VoteDAO {
 
     public boolean hasVoted(int userId, int electionId) {

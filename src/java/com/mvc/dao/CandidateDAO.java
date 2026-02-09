@@ -3,7 +3,7 @@ package com.mvc.dao;
 import java.sql.*;
 import com.mvc.model.Candidate;
 import com.mvc.util.DBConnection;
-
+//
 public class CandidateDAO {
 
     public boolean addCandidate(Candidate c) {

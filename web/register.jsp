@@ -17,7 +17,7 @@ body{
     background: linear-gradient(135deg,#1f3c88,#4a80ff);
 }
 
-/* ===== PARTICLES ===== */
+/* ===== PARTICLES ==== */
 #particles{
     position:fixed;
     top:0;

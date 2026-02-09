@@ -7,7 +7,7 @@ public class Election {
     private String startDate;
     private String endDate;
     private String status;
-
+    //
     public int getElectionId() { return electionId; }
     public void setElectionId(int electionId) { this.electionId = electionId; }
 

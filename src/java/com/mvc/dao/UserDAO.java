@@ -3,7 +3,7 @@ package com.mvc.dao;
 import java.sql.*;
 import com.mvc.model.User;
 import com.mvc.util.DBConnection;
-
+//
 public class UserDAO {
 
     // Register user

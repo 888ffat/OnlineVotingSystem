@@ -189,7 +189,7 @@ body {
 
 <body>
 
-<!-- ===== SIDEBAR ===== -->
+<!-- ===== SIDEBAR ==== -->
 <div class="sidebar">
     <h3>Voting Admin</h3>
     <a href="admin_dashboard.jsp" class="active">Dashboard Overview</a>

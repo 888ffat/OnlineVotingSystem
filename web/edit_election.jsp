@@ -81,7 +81,7 @@ body {
     border-left: 4px solid var(--secondary);
 }
 
-/* ===== MAIN CONTENT ===== */
+/* ===== MAIN CONTENT ==== */
 .main-content {
     flex: 1;
     display: flex;

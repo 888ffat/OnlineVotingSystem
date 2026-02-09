@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.mvc.model.User" %>
 <%
-    // Security Check: Ensure only logged-in admins can access
+    // Security Check
     User user = (User) session.getAttribute("user");
     if(user == null || !user.getRole().equals("admin")){
         response.sendRedirect("login.jsp");

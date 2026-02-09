@@ -143,7 +143,6 @@
             transform: translateY(-2px);
         }
 
-        /* Table */
         .table-container {
             background: var(--white);
             border-radius: 20px;

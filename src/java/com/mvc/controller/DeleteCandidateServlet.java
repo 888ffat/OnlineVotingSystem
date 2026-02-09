@@ -4,7 +4,7 @@ import com.mvc.dao.CandidateDAO;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import java.io.IOException;
-
+//
 public class DeleteCandidateServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse res)

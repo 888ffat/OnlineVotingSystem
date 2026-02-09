@@ -7,7 +7,7 @@ public class User {
     private String email;
     private String password;
     private String role;
-
+    //
     public int getUserId() { return userId; }
     public void setUserId(int userId) { this.userId = userId; }
 

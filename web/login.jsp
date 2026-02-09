@@ -17,7 +17,7 @@ body{
     background: linear-gradient(135deg,#1f3c88,#4a80ff);
 }
 
-/* ===== Particle canvas ===== */
+/* ===== Particle canvas ==== */
 #particles{
     position:fixed;
     top:0;
